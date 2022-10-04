@@ -1,21 +1,16 @@
 const Review = require("../models/ClientReview.model");
-const cloudinary = require("../utils/cloudinary");
+
 const createReviewService = async (req, res) => {
   let newReview;
-  const { name, company, message, star, position } = req.body;
-  console.log(req.body);
-  // Upload image to cloudinary
-  const photo = await cloudinary.uploader.upload(req.file.path);
-
+  const { name, company, message, star, position, image } = req.body;
   // create
   newReview = new Review({
-    image: photo.secure_url,
+    image,
     name,
     company,
     message,
     star,
     position,
-    cloudinary_id: photo.public_id,
   });
 
   return await newReview.save();

@@ -4,7 +4,7 @@ const { requireSignIn } = require("../controllers/auth.controller");
 const blogsRouter = require("express").Router();
 blogsRouter
   .route("/")
-  .post(requireSignIn, upload.single("thumb"), blogsCtrl.create)
+  .post(requireSignIn, blogsCtrl.create)
   .get(requireSignIn, blogsCtrl.list);
 blogsRouter
   .route("/:blogId")

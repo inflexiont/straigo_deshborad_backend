@@ -1,18 +1,16 @@
 const Blog = require("../models/Blogs.model");
-const cloudinary = require("../utils/cloudinary");
 const createBlogService = async (req, res) => {
   let newBlog;
-  const { title, category, details } = req.body;
-  // Upload image to cloudinary
-  const photo = await cloudinary.uploader.upload(req.file.path);
+  const { title, category, details, thumb, cover } = req.body;
+
   // create
   newBlog = new Blog({
-    thumb: photo.secure_url,
+    thumb,
     title,
     date: new Date(),
     category,
     details,
-    cloudinary_id: photo.public_id,
+    cover,
   });
 
   return await newBlog.save();
