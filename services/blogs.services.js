@@ -27,7 +27,6 @@ const updateBlogService = async (req, res) => {
   if (!blog) return res.status(404).json({ message: "Blog is not found" });
   if (blog) {
     const { title, category, details } = blog;
-
     const update = {
       title: newTitle ?? title,
       category: newCategory ?? category,

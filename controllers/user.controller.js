@@ -33,41 +33,30 @@ const read = async (req, res, next) => {
   try {
     const userId = req.params.userId;
     const user = await User.findById(userId);
-    res.status(200).json(user);
-  } catch (error) {
-    next(err);
-  }
-};
-const userByID = async (req, res, next, id) => {
-  try {
-    let user = await User.findById(id)
-      .populate("following", "_id name")
-      .populate("followers", "_id name");
-
-    if (!user)
-      return res.status("400").json({
-        error: "User not found",
-      });
-    req.requestedUser = user;
-    next();
-  } catch (err) {
-    return res.status("400").json({
-      error: "Could not retrieve user",
+    res.status(200).json({
+      name: user?.name,
+      email: user?.email,
     });
+  } catch (error) {
+    next(error);
   }
 };
+
 const update = async (req, res, next) => {
   try {
     const filter = { _id: req.params.userId };
     const update = {
-      username: req.body.username,
+      name: req.body.name,
       email: req.body.email,
     };
     const option = { new: true };
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
-    res.status(400).json({
+    res.status(200).json({
       status: "success",
-      user: updatedUser,
+      user: {
+        name: updatedUser?.name,
+        email: updatedUser?.email,
+      },
     });
   } catch (err) {
     return res.status(400).json({
@@ -88,4 +77,6 @@ module.exports = {
   create,
   list,
   read,
+  update,
+  remove,
 };
