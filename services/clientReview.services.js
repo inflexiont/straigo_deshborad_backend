@@ -24,6 +24,7 @@ const updateReviewService = async (req, res) => {
     message: newMessage,
     star: newStar,
     position: newPosition,
+    image: newImage,
   } = req.body;
 
   const review = await Review.findById(reviewId);
@@ -37,6 +38,7 @@ const updateReviewService = async (req, res) => {
       message: newMessage ?? message,
       star: newStar ?? star,
       position: newPosition ?? position,
+      image: newImage ?? image,
     };
 
     return Review.findByIdAndUpdate(reviewId, update, { new: true });
