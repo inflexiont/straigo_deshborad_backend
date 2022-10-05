@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
 const corsOptions = {
-  origin: "http://127.0.0.1:5173",
+  origin: ["https://admin.straigo.com", "http://127.0.0.1:5173"],
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
