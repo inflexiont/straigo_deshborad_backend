@@ -3,10 +3,13 @@ const { mongoUri } = require("../config/config");
 const connectionDB = () => {
   //connection mongodb with mongoose
   return mongoose
-    .connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    .connect(
+      "mongodb+srv://straigo:BEA6O6db53t9Tw3o@cluster0.ngivkia.mongodb.net/?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    )
     .then(() => {
       console.log("database connected successfully");
     })
